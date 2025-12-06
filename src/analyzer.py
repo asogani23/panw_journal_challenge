@@ -11,3 +11,14 @@ class JournalAnalyzer:
         # TODO: I will initialize the VADER sentiment model here
         pass
 
+    def analyze_entry(self, text: str) -> Dict[str, Any]:
+        """
+        Analyzes the text for sentiment and generates contextual tags.
+        
+        Args:
+            text (str): The raw journal entry.
+            
+        Returns:
+            Dict: Contains sentiment label, score, and tags.
+        """
+       
