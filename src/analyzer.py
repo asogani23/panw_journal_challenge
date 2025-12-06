@@ -14,7 +14,7 @@ class JournalAnalyzer:
         """
         Analyzes the text for sentiment and generates contextual tags.
         
-        We use VADER here because it is rule-based and specifically tuned 
+        I use VADER here because it is rule-based and specifically tuned 
         for social media data (emojis, capitalization), making it more 
         robust for journaling than a standard Naive Bayes classifier.
         """
@@ -24,6 +24,11 @@ class JournalAnalyzer:
                 "score": 0.0,
                 "tags": ["Empty"]
             }
+
+        # VADER returns a compound score from -1 (Extremely Negative) 
+        # to 1 (Extremely Positive).
+        scores = self.analyzer.polarity_scores(text)
+        compound = scores['compound']
 
         # TODO: will replace this placeholder logic with actual NLP analysis
         # Currently returning a stub to allow CLI development to proceed
