@@ -14,12 +14,10 @@ class JournalAnalyzer:
         """
         Analyzes the text for sentiment and generates contextual tags.
         
-        I use VADER here because it is rule-based and specifically tuned 
+        We use VADER here because it is rule-based and specifically tuned 
         for social media data (emojis, capitalization), making it more 
         robust for journaling than a standard Naive Bayes classifier.
         """
-
-        # the Edge case handling for empty inputs
         if not text or not text.strip():
             return {
                 "sentiment": "Neutral",
