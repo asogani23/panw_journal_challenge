@@ -14,11 +14,9 @@ class JournalAnalyzer:
         """
         Analyzes the text for sentiment and generates contextual tags.
         
-        Args:
-            text (str): The raw journal entry.
-            
-        Returns:
-            Dict: Contains sentiment label, score, and tags.
+        I use VADER here because it is rule-based and specifically tuned 
+        for social media data (emojis, capitalization), making it more 
+        robust for journaling than a standard Naive Bayes classifier.
         """
 
         # the Edge case handling for empty inputs
