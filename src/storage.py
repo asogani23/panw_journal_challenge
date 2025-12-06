@@ -29,3 +29,7 @@ class JournalStorage:
             self.path.parent.mkdir(parents=True, exist_ok=True)
             self.path.write_text("[]", encoding="utf-8")
     
+
+    def save_entries(self, entries: List[Entry]) -> None:
+        serializable = [asdict(e) for e in entries]
+        self.path.write_text(json.dumps(serializable, indent=2), encoding="utf-8")
