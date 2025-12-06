@@ -14,7 +14,7 @@ class JournalAnalyzer:
         """
         Analyzes the text for sentiment and generates contextual tags.
         
-        I use VADER here because it is rule-based and specifically tuned 
+        We use VADER here because it is rule-based and specifically tuned 
         for social media data (emojis, capitalization), making it more 
         robust for journaling than a standard Naive Bayes classifier.
         """
@@ -39,4 +39,19 @@ class JournalAnalyzer:
             label = "Negative"
 
         tags = [label]
+        
+        # CRITICAL LOGIC: Handling Ambiguity
+        # We look for high-intensity scores to distinguish between
+        # "crushing it" (High Positive) and "crushing me" (High Negative).
+        # A threshold of 0.75 indicates strong emotional intensity.
+        if compound >= 0.75:
+            tags.append("High Energy")
+        elif compound <= -0.75:
+            tags.append("High Stress")
+
+        return {
+            "sentiment": label,
+            "score": compound,
+            "tags": tags
+        }
        
