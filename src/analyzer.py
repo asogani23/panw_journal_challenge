@@ -8,8 +8,7 @@ class JournalAnalyzer:
     """
 
     def __init__(self):
-        # TODO: I will initialize the VADER sentiment model here
-        pass
+        self.analyzer = SentimentIntensityAnalyzer()
 
     def analyze_entry(self, text: str) -> Dict[str, Any]:
         """
