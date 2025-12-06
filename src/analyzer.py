@@ -30,11 +30,13 @@ class JournalAnalyzer:
         scores = self.analyzer.polarity_scores(text)
         compound = scores['compound']
 
-        # TODO: will replace this placeholder logic with actual NLP analysis
-        # Currently returning a stub to allow CLI development to proceed
-        return {
-            "sentiment": "Neutral",
-            "score": 0.0,
-            "tags": ["Neutral", "Placeholder"]
-        }
+        # Determine Primary Label
+        # Thresholds based on standard VADER documentation (+/- 0.05 is neutral)
+        label = "Neutral"
+        if compound >= 0.05:
+            label = "Positive"
+        elif compound <= -0.05:
+            label = "Negative"
+
+        tags = [label]
        
