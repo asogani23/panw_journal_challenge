@@ -21,4 +21,20 @@ class JournalAnalyzer:
         Returns:
             Dict: Contains sentiment label, score, and tags.
         """
+
+        # the Edge case handling for empty inputs
+        if not text or not text.strip():
+            return {
+                "sentiment": "Neutral",
+                "score": 0.0,
+                "tags": ["Empty"]
+            }
+
+        # TODO: will replace this placeholder logic with actual NLP analysis
+        # Currently returning a stub to allow CLI development to proceed
+        return {
+            "sentiment": "Neutral",
+            "score": 0.0,
+            "tags": ["Neutral", "Placeholder"]
+        }
        
