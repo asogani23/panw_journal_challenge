@@ -12,3 +12,20 @@ class Entry:
     text: str
     tags: Dict[str, str]
     scores: Dict[str, Any]
+# ... Entry class ...
+
+class JournalStorage:
+    def __init__(self, path: Path) -> None:
+        self.path = path
+        
+    # ... inside JournalStorage ...
+    def _ensure_file(self) -> None:
+        if not self.path.exists():
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+            self.path.write_text("[]", encoding="utf-8")
+    # ... inside JournalStorage ...
+    def _ensure_file(self) -> None:
+        if not self.path.exists():
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+            self.path.write_text("[]", encoding="utf-8")
+    
