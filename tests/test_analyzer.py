@@ -28,3 +28,8 @@ def test_empty_text_is_neutral_low_energy_unknown_stress(analyzer):
     assert result.tags["energy"] == "low"
     assert result.tags["stress"] == "unknown"
     assert result.scores.get("note") == "empty entry"
+
+def test_explicit_stress_word_overrides_to_high_stress(analyzer):
+    text = "I feel overwhelmed lately but I am trying to stay calm."
+    result = analyzer.analyze(text)
+    assert result.tags["stress"] == "high"
