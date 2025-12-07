@@ -89,22 +89,27 @@ Key modules:
 
 ---
 
-## 3. Setup
+## 3. Setup and Installation
 
-Create and activate a virtual environment, then install dependencies:
+### 3.1 Prerequisites
+* **Python 3.9+**
+* A terminal (Bash/Zsh)
 
-    python -m venv venv
-    source venv/bin/activate          # On Windows: venv\Scripts\activate
-    pip install -r requirements.txt
+### 3.2 Installation
+```bash
+# 1. Clone the repository (or unzip the submission)
+git clone <your-repo-link-if-applicable>
+cd panw_journal_challenge
 
-This installs:
+# 2. Create and activate a virtual environment
+python3 -m venv venv
+source venv/bin/activate       # On Windows: venv\Scripts\activate
 
-- vaderSentiment – sentiment analysis.  
-- pytest – test runner.
+# 3. Install dependencies
+pip install -r requirements.txt
 
-Run the tests:
-
-    pytest
+# 4. Make the helper script executable
+chmod +x run.sh
 
 ---
 
