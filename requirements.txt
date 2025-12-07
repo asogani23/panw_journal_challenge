@@ -1,2 +1,2 @@
 vaderSentiment>=3.3.2
-
+pytest>=8.0.0
