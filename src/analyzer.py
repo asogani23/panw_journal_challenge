@@ -1,7 +1,19 @@
-from typing import Dict, Any, List
-#  will integrate VADER later
-# from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from dataclasses import dataclass
+from typing import Dict, Any
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
+@dataclass
+class AnalysisResult:
+    tags: Dict[str, str]
+    scores: Dict[str, Any]
+
+class WellbeingAnalyzer:
+    def __init__(self) -> None:
+        self._sentiment = SentimentIntensityAnalyzer()
+
+    # Stubbing the new method signature
+    def analyze(self, text: str) -> AnalysisResult:
+        return AnalysisResult(tags={}, scores={})
 class JournalAnalyzer:
     """
     Handles the NLP logic for the journaling app.
