@@ -1,0 +1,78 @@
+[
+  {
+    "id": 1,
+    "created_at": "2025-12-07T10:06:58.519393+00:00",
+    "text": "I am absolutely CRUSHING IT at work today! \ud83d\udd25",
+    "tags": {
+      "mood": "positive",
+      "energy": "medium",
+      "stress": "engaged"
+    },
+    "scores": {
+      "sentiment": {
+        "neg": 0.47,
+        "neu": 0.53,
+        "pos": 0.0,
+        "compound": -0.7366
+      },
+      "energy_index": 0.25
+    }
+  },
+  {
+    "id": 2,
+    "created_at": "2025-12-07T10:07:03.419659+00:00",
+    "text": "The workload is crushing me and I'm so stressed out...",
+    "tags": {
+      "mood": "negative",
+      "energy": "low",
+      "stress": "high"
+    },
+    "scores": {
+      "sentiment": {
+        "neg": 0.412,
+        "neu": 0.588,
+        "pos": 0.0,
+        "compound": -0.6825
+      },
+      "energy_index": 0.0
+    }
+  },
+  {
+    "id": 3,
+    "created_at": "2025-12-07T10:07:28.872990+00:00",
+    "text": "Pretty calm day. Just coded for a few hours.",
+    "tags": {
+      "mood": "positive",
+      "energy": "low",
+      "stress": "moderate"
+    },
+    "scores": {
+      "sentiment": {
+        "neg": 0.0,
+        "neu": 0.56,
+        "pos": 0.44,
+        "compound": 0.6705
+      },
+      "energy_index": 0.0
+    }
+  },
+  {
+    "id": 4,
+    "created_at": "2025-12-07T10:08:20.424268+00:00",
+    "text": "BRO I AM SO TIRED!!! literally dying rn \ud83d\udc80",
+    "tags": {
+      "mood": "negative",
+      "energy": "high",
+      "stress": "high"
+    },
+    "scores": {
+      "sentiment": {
+        "neg": 0.446,
+        "neu": 0.554,
+        "pos": 0.0,
+        "compound": -0.8151
+      },
+      "energy_index": 0.7
+    }
+  }
+]
