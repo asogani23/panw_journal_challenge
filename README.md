@@ -1,152 +1,247 @@
+<pre>
 # AI-Powered Journaling CLI (PANW Intern Engineer Challenge)
 
-**Author:** Aagam Sogani  
-**Challenge:** Palo Alto Networks – Intern Engineer Case Challenge  
-**Option:** Option 1 – AI-Powered Journaling Logic
+Author: **Aagam Sogani**  
+Role: Palo Alto Networks – Intern Engineer Case Challenge  
+Option: **1 – AI-Powered Journaling Logic**
 
 ---
 
-## 📖 Overview
+## 1. Overview
 
-This repository implements a lightweight command-line journaling tool designed to analyze raw, conversational text and tag entries with mental well-being signals:
+This repo implements a small **command-line journaling tool** that analyzes raw, conversational text and tags each entry with mental well-being signals:
 
-- **Mood:** `positive`, `negative`, `neutral`
-- **Energy:** `low`, `medium`, `high`
-- **Stress:** `high`, `drained`, `engaged`, `moderate`, `unknown`
+- `mood`   – positive / negative / neutral  
+- `energy` – low / medium / high  
+- `stress` – high / drained / engaged / moderate / unknown  
 
-The goal is to demonstrate **AI-native engineering** by orchestrating existing tools rather than reinventing them. The tool:
+The goal is to demonstrate **AI-native engineering**:
 
-- Accepts “messy” input (slang, emojis, inconsistent grammar).
-- Uses **VADER** (an NLP library) for base sentiment analysis.
-- Implements a heuristic layer to handle linguistic ambiguity:
-  - *"I am crushing it at work"* → **Positive / High Energy / Engaged**
-  - *"The workload is crushing me"* → **Negative / High Stress**
-- Persists entries to a local JSON file.
-- Provides a CLI to log entries and view summaries.
-
----
-
-## 📂 Project Structure
-
-**Key Modules**
-
-* **`src/analyzer.py`**: The core logic. Uses `vaderSentiment` for base scores, then adds an "energy index" (based on caps/punctuation) and an override layer for context (e.g., "crushing").
-* **`src/storage.py`**: Handles safe JSON I/O, timestamping (UTC ISO 8601), and data integrity.
-* **`src/cli.py`**: The interface. Handles arguments for `add` and `summary` commands.
+- Handle “messy” text (slang, emojis, inconsistent grammar).  
+- Use an NLP library for base sentiment instead of reinventing it.  
+- Add contextual logic so:
+  - "I am crushing it at work" → Positive / High energy / Engaged  
+  - "The workload is crushing me" → Negative / High stress  
+- Persist entries locally so the user can review their history.  
+- Provide a simple CLI summary of the most recent entries.
 
 ---
 
-## 🚀 Setup and Usage
+## 2. Project Structure
 
-### 1. Install Dependencies
-```bash
-python -m venv venv
-source venv/bin/activate       # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
+panw_journal_challenge/
+├── data/                      # Created automatically for journal_entries.json
+├── src/
+│   ├── __init__.py
+│   ├── analyzer.py            # WellbeingAnalyzer (sentiment + heuristics)
+│   ├── storage.py             # JSON-based persistence layer
+│   └── cli.py                 # CLI entry point (add + summary)
+├── tests/
+│   ├── __init__.py
+│   └── test_analyzer.py       # Unit tests for ambiguity + edge cases
+├── requirements.txt
+└── run.sh                     # Convenience wrapper for python -m src.cli
 
-2. Run Tests
-I included a test suite to prove the logic handles the specific edge cases requested in the prompt.
-```bash
-pytest
-```
-Verifies: "Crushing it" (Positive) vs "Crushing me" (Negative), empty inputs, and explicit stress words.
+Key modules:
 
-3. Use the CLI
-Add an Entry:
+- src/analyzer.py  
+  - WellbeingAnalyzer:
+    - Uses vaderSentiment for base sentiment.  
+    - Adds an “energy index” based on exclamation marks and ALL-CAPS words.  
+    - Infers stress from mood + energy + explicit stress words.  
+    - Adds override rules for phrases involving "crushing".
 
-```bash
+- src/storage.py  
+  - JournalStorage handles JSON file I/O (data/journal_entries.json).  
+  - Entry dataclass is the on-disk representation: id, created_at, text, tags, scores.
 
-# Using the helper script
-./run.sh add "I am absolutely CRUSHING IT at work today! 🔥"
+- src/cli.py  
+  - add subcommand: analyze a new entry, persist it, print tags + scores.  
+  - summary subcommand: print a formatted summary of the last N entries.
 
-# Or directly via Python
-python -m src.cli add "The workload is crushing me and I'm so stressed out..."
-```
-View Summary:
+- tests/test_analyzer.py  
+  - Unit tests for:
+    - "crushing it" vs "crushing me".  
+    - Empty input.  
+    - Explicit stress words (e.g., "overwhelmed").  
+    - High-energy text with ALL-CAPS and exclamation marks.
 
-```bash
+---
 
-./run.sh summary --last 3
-```
-Sample Output:
+## 3. Setup
 
-Plaintext
+Create and activate a virtual environment, then install dependencies:
 
-Last 3 entries from data/journal_entries.json:
-========================================
-#4 @ 2025-12-07T04:03:36.658751+00:00
-I am absolutely CRUSHING IT at work today! 🔥
-Tags:
-  - mood: positive
-  - energy: medium
-  - stress: engaged
-Scores:
-  - energy_index: 0.25
-  - sentiment (compound=-0.7366, pos=0.0, neu=0.53, neg=0.47)
-Note on Scores: In the example above, the raw VADER score (-0.7366) is negative because the lexicon interprets "crushing" as destructive. However, my Contextual Logic layer correctly identified the idiom "crushing it" and forced the tags to Positive/Engaged. I chose to preserve the raw score to visualize the "correction" made by the heuristic layer.
+    python -m venv venv
+    source venv/bin/activate          # On Windows: venv\Scripts\activate
+    pip install -r requirements.txt
 
-🧠 Tagging Logic (Methodology)
+This installs:
+
+- vaderSentiment – sentiment analysis.  
+- pytest – test runner.
+
+Run the tests:
+
+    pytest
+
+---
+
+## 4. Usage
+
+You can call the CLI with `python -m src.cli` or via the helper script `run.sh`.
+
+### 4.1 Add an Entry
+
+Using the helper script:
+
+    ./run.sh add "I am absolutely CRUSHING IT at work today! 🔥"
+
+Or directly via Python:
+
+    python -m src.cli add "The workload is crushing me and I'm so stressed out..."
+
+### 4.2 View Summary
+
+    ./run.sh summary --last 3
+
+### 4.3 Sample Output
+
+    Last 3 entries from data/journal_entries.json:
+    ========================================
+    #4 @ 2025-12-07T04:03:36.658751+00:00
+    I am absolutely CRUSHING IT at work today! 🔥
+    Tags:
+      - mood: positive
+      - energy: medium
+      - stress: engaged
+    Scores:
+      - energy_index: 0.25
+      - sentiment (compound=-0.7366, pos=0.0, neu=0.53, neg=0.47)
+
+Note on scores: in this example, the raw VADER score is negative because the lexicon treats “crushing” as destructive.  
+My contextual logic layer recognizes the idiom "crushing it" and forces the tags to Positive / Engaged. I keep the raw scores so you can see the correction made by the heuristic layer.
+
+You can also point the CLI at a custom storage file:
+
+    ./run.sh --file data/alt_journal.json add "Separate test journal file."
+    ./run.sh --file data/alt_journal.json summary --last 2
+
+---
+
+## 5. Tagging Logic (High Level)
+
 For each entry, the WellbeingAnalyzer follows this pipeline:
 
-Preprocessing: Trims whitespace. Returns "Neutral/Low/Unknown" if empty.
+1. Preprocessing  
+   - Trim whitespace.  
+   - If the result is empty → tags: mood=neutral, energy=low, stress=unknown.
 
-Base Sentiment (VADER): Calculates a compound score.
+2. Base Sentiment (VADER)  
+   - Use SentimentIntensityAnalyzer to get compound, pos, neu, neg.  
+   - Map compound to mood:
+     - compound ≥ 0.4  → mood = "positive"  
+     - compound ≤ -0.4 → mood = "negative"  
+     - otherwise       → mood = "neutral"
 
->= 0.4: Positive
+3. Energy Calculation  
+   - Count exclamation marks (!).  
+   - Compute fraction of ALL-CAPS words (length > 2 and isupper()).  
+   - Combine into an energy_index in [0, 1], then bucket:
+     - energy_index < 0.3 → energy = "low"  
+     - energy_index < 0.7 → energy = "medium"  
+     - else               → energy = "high".
 
-<= -0.4: Negative
+4. Stress Inference  
+   - If the text contains words like "overwhelmed", "stressed", "anxious", "panic", "burned out" → stress = "high".  
+   - Otherwise, use mood + energy:
+     - mood = negative, energy = high   → stress = "high"  
+     - mood = negative, energy = low    → stress = "drained"  
+     - mood = positive, energy = high   → stress = "engaged"  
+     - else                             → stress = "moderate".
 
-Else: Neutral
+5. Ambiguity Overrides for "crushing"  
+   - If text contains "crushing it" or "crushing at":
+     - Force mood = "positive", stress = "engaged", and avoid low energy.  
+   - If text contains "crushing me" or "crushing my":
+     - Force mood = "negative", stress = "high".  
+     - If VADER’s compound was borderline (> -0.4), push it slightly negative.
 
-Energy Calculation:
+This shows that the tool is not just doing a naive keyword search for "crushing"; it uses local context to resolve ambiguity.
 
-Counts exclamation marks (!).
+---
 
-Calculates fraction of ALL CAPS words.
+## 6. Methodology & AI Usage
 
-Combines them into an energy_index (0.0 to 1.0).
+This section is explicit on purpose to follow the PANW instructions about AI-native engineering.
 
-Stress Inference:
+### 6.1 Tools Used
 
-Scans for explicit words: "overwhelmed", "panic", "burnout".
+- ChatGPT  
+  I used ChatGPT as a coding assistant to:
+  - Brainstorm the overall structure (splitting analyzer, storage, and cli).  
+  - Iterate on the energy and stress heuristics.  
+  - Draft the initial CLI and unit tests.
 
-Derives state: Negative Mood + High Energy = High Stress.
+- Local Python environment  
+  I:
+  - Installed and experimented with vaderSentiment.  
+  - Ran the CLI with different sample entries.  
+  - Tuned thresholds and overrides based on observed outputs.
 
-Ambiguity Override (The "Human" Layer):
+### 6.2 How I Validated the Output
 
-If text contains "crushing it": Force Mood=Positive, Stress=Engaged.
+1. Unit Tests (tests/test_analyzer.py)
 
-If text contains "crushing me": Force Mood=Negative, Stress=High.
+   I added tests to confirm that:
 
-🤖 AI Usage Disclosure
-In compliance with the challenge rules regarding AI-Native Engineering:
+   - "I am absolutely CRUSHING IT at work today! 🔥"  
+     → mood = positive, stress = engaged, energy is medium or high.  
 
-Tools Used: ChatGPT (GPT-4o)
+   - "The workload is crushing me and I am so stressed out..."  
+     → mood = negative, stress = high.  
 
-How I Used It:
+   - Empty or whitespace-only text  
+     → mood = neutral, energy = low, stress = unknown.  
 
-Boilerplate: Generated the initial argparse skeleton and project structure to save setup time.
+   - Sentences containing "overwhelmed"  
+     → stress = high.  
 
-Ideation: Used as a sounding board to refine the "Energy Index" heuristic.
+   - ALL-CAPS + "!!!" pushes energy toward medium/high.
 
-Data Generation: Generated synthetic test phrases (slang, emojis) to validate VADER's limits.
+2. Manual CLI Runs
 
-Verification & Ownership:
+   I used `./run.sh add ...` and `./run.sh summary --last N` with a variety of synthetic entries (positive, negative, neutral, high-energy, low-energy) to verify that:
 
-I manually wrote the Override Logic in analyzer.py to solve the specific "crushing" edge case.
+   - The CLI does not crash on empty or messy input.  
+   - data/journal_entries.json stays well-formed and readable.  
+   - Tags behave as expected for ambiguous phrases like "crushing it" / "crushing me".
 
-I wrote the Unit Tests in tests/test_analyzer.py to mathematically prove the logic works.
+3. Threshold Tuning
 
-I tuned the thresholds (e.g., 0.4 for sentiment) based on real CLI outputs.
+   - Adjusted mood thresholds for VADER’s compound to reduce borderline mislabels.  
+   - Tuned energy bucketing so casual messages do not show as “high energy,” but intense ALL-CAPS / punctuation does.
 
-I am fully responsible for every line of code in this repository.
+### 6.3 Responsibility
 
-🔮 Possible Extensions
-If I were deploying this to production, I would:
+Even though I used ChatGPT to speed up boilerplate and iterate on ideas, I:
 
-Upgrade Model: Swap VADER for a lightweight Transformer (e.g., DistilBERT) fine-tuned on mental health texts for better context awareness without the need for manual overrides.
+- Reviewed and edited every line of code.  
+- Designed and tuned the heuristics and override rules.  
+- Wrote and ran tests to make sure the behavior matched the challenge spec.
 
-Trend Analysis: Add a trends command to visualize mood changes over time.
+I take responsibility for the final implementation and any remaining edge cases.
 
-Data Privacy: Encrypt the JSON file at rest.
+---
+
+## 7. Possible Extensions
+
+If this were evolving into a real product or if I had more time, I would consider:
+
+- Replacing VADER with a small transformer-based classifier fine-tuned on journaling data.  
+- Adding a `trend` command to summarize mood and stress over time.  
+- Supporting anonymized export of entries for further analysis or visual dashboards.  
+- Growing the test suite to cover more regression cases as the heuristics evolve.
+
+For this challenge, I focused on keeping the tool simple, robust, and easy to reason about, which lines up with the “Engineering Integrity” focus of the prompt.
+</pre>
