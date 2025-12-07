@@ -91,3 +91,32 @@ def show_summary(args) -> None:
 def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
+
+# ... inside add_entry(args) ...
+def add_entry(args) -> None:
+    storage_path = Path(args.file) if args.file else DEFAULT_DATA_PATH
+    storage = JournalStorage(storage_path)
+    analyzer = WellbeingAnalyzer()
+
+    entries = storage.load_entries()
+    new_id = storage.next_id(entries)
+
+    analysis = analyzer.analyze(args.text)
+    entry = Entry(
+        id=new_id,
+        created_at=JournalStorage.now_utc_iso(),
+        text=args.text,
+        tags=analysis.tags,
+        scores=analysis.scores,
+    )
+
+    entries.append(entry)
+    storage.save_entries(entries)
+
+    print(f"Saved entry #{entry.id} to {storage_path}")
+    print("Tags:")
+    for k, v in analysis.tags.items():
+        print(f"  - {k}: {v}")
+    print("Scores:")
+    for k, v in analysis.scores.items():
+        print(f"  - {k}: {v}")
