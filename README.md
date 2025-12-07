@@ -1,4 +1,3 @@
-<pre>
 # AI-Powered Journaling CLI (PANW Intern Engineer Challenge)
 
 Author: **Aagam Sogani**  
@@ -244,4 +243,3 @@ If this were evolving into a real product or if I had more time, I would conside
 - Growing the test suite to cover more regression cases as the heuristics evolve.
 
 For this challenge, I focused on keeping the tool simple, robust, and easy to reason about, which lines up with the “Engineering Integrity” focus of the prompt.
-</pre>
