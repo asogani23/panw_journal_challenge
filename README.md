@@ -153,6 +153,13 @@ You can also point the CLI at a custom storage file:
 
     ./run.sh --file data/alt_journal.json add "Separate test journal file."
     ./run.sh --file data/alt_journal.json summary --last 2
+### 4.5 Running Tests
+
+From the project root (after installing dependencies):
+
+```bash
+pytest
+```
 
 ---
 
