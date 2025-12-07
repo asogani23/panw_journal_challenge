@@ -26,7 +26,8 @@ The focus is **engineering integrity**. I optimized for:
 
 - **Sentiment library – `vaderSentiment`**  
   I chose VADER instead of writing my own sentiment model or calling a remote API because:
-  - It is **lightweight and offline** (no network calls, no API keys), which fits a CLI tool.  
+  - It is **lightweight and offline** (no network calls, no API keys), which fits a CLI tool.
+  - Unlike BERT (400MB+), VADER is <1MB, runs instantly on a CPU, and requires no API keys. 
   - It is tuned for **social-media-style text and emojis**, which matches the “messy journaling” use case.  
   - It keeps the logic **transparent**: I can still see the raw scores and layer my own rules on top.
 
