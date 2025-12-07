@@ -59,7 +59,7 @@ The focus is **engineering integrity**. I optimized for:
   - I treat all remaining bugs as my responsibility, not the model’s.
 
 The rest of this README explains the project structure, how to run the CLI, the tagging logic, and a detailed **Methodology & AI Usage** section.
-</pre>
+
 ---
 
 ## 2. Project Structure
