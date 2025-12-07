@@ -90,4 +90,41 @@ class WellbeingAnalyzer:
                     sentiment_scores["compound"] = -0.5
 
         return mood, energy, stress
+    # ... inside WellbeingAnalyzer ...
+
+    def analyze(self, text: str) -> AnalysisResult:
+        stripped = text.strip()
+        if not stripped:
+            return AnalysisResult(
+                tags={"mood": "neutral", "energy": "low", "stress": "unknown"},
+                scores={"note": "empty entry"},
+            )
+
+        # 1. Base Sentiment
+        sentiment_scores = self._sentiment.polarity_scores(stripped)
+        mood = self._mood_from_sentiment(sentiment_scores["compound"])
+
+        # 2. Energy Heuristics
+        energy_index = self._energy_index(stripped)
+        energy = self._bucket_energy(energy_index)
+
+        # 3. Derived Stress
+        stress = self._stress_level(mood, energy, stripped)
+
+        # 4. Contextual Refinement (The "Human" Layer)
+        mood, energy, stress = self._ambiguity_overrides(
+            stripped, mood, energy, stress, sentiment_scores
+        )
+
+        return AnalysisResult(
+            tags={
+                "mood": mood,
+                "energy": energy,
+                "stress": stress,
+            },
+            scores={
+                "sentiment": sentiment_scores,
+                "energy_index": round(energy_index, 3),
+            },
+        )
 
