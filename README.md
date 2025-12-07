@@ -1,7 +1,7 @@
 # AI-Powered Journaling CLI (PANW Intern Engineer Challenge)
 
 Author: **Aagam Sogani**  
-Role: Palo Alto Networks – Intern Engineer Case Challenge  
+Role: Palo Alto Networks Product Software Engineer Intern Case Challenge  
 Option: **1 – AI-Powered Journaling Logic**
 
 ---
