@@ -66,22 +66,22 @@ The rest of this README explains the project structure, how to run the CLI, the 
 
 Key modules:
 
-- ** src/analyzer.py **
+- **src/analyzer.py**
   - WellbeingAnalyzer:
     - Uses vaderSentiment for base sentiment.  
     - Adds an “energy index” based on exclamation marks and ALL-CAPS words.  
     - Infers stress from mood + energy + explicit stress words.  
     - Adds override rules for phrases involving "crushing".
 
-- ** src/storage.py  **
+- **src/storage.py**
   - JournalStorage handles JSON file I/O (data/journal_entries.json).  
   - Entry dataclass is the on-disk representation: id, created_at, text, tags, scores.
 
-- ** src/cli.py  **
+- **src/cli.py**
   - add subcommand: analyze a new entry, persist it, print tags + scores.  
   - summary subcommand: print a formatted summary of the last N entries.
 
-- ** tests/test_analyzer.py  **
+- **tests/test_analyzer.py**
   - Unit tests for:
     - "crushing it" vs "crushing me".  
     - Empty input.  
