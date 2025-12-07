@@ -163,10 +163,9 @@ This section is explicit on purpose to follow the instructions about AI-native e
 
 ### 6.1 Tools Used
 
-- ChatGPT  
-  I used ChatGPT as a coding assistant to:
+- GitHub Copilot
+  I used Copilot as a coding assistant to:
   - Brainstorm the overall structure (splitting analyzer, storage, and cli).  
-  - Iterate on the energy and stress heuristics.  
   - Draft the initial CLI and unit tests.
 
 - Local Python environment  
@@ -175,7 +174,7 @@ This section is explicit on purpose to follow the instructions about AI-native e
   - Ran the CLI with different sample entries.  
   - Tuned thresholds and overrides based on observed outputs.
 
-### 6.2 How I Validated the Output
+### 6.2 How I Validated the Output of the tools I used
 
 1. Unit Tests (tests/test_analyzer.py)
 
