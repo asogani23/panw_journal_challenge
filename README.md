@@ -204,16 +204,15 @@ This section is explicit on purpose to follow the instructions about AI-native e
 
 ### 6.1 Tools Used
 
-- GitHub Copilot:
+- GitHub Copilot -
   I used Copilot as a coding assistant to:
   - Brainstorm the overall structure (splitting analyzer, storage, and cli).  
   - Draft the initial CLI and unit tests.
 
-- Local Python environment  
-  I:
-  - Installed and experimented with vaderSentiment.  
-  - Ran the CLI with different sample entries.  
-  - Tuned thresholds and overrides based on observed outputs.
+- Local Python environment:
+  - I installed and experimented with vaderSentiment.  
+  - I ran the CLI with different sample entries.  
+  - I tuned thresholds and overrides based on observed outputs.
 
 ### 6.2 How I Validated the Output of the tools I used
 
