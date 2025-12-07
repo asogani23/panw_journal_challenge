@@ -97,8 +97,8 @@ Key modules:
 
 ### 3.2 Installation
 ```bash
-# 1. Clone the repository (or unzip the submission)
-git clone <your-repo-link-if-applicable>
+# 1. Clone the repository
+git clone https://github.com/asogani23/panw_journal_challenge.git
 cd panw_journal_challenge
 
 # 2. Create and activate a virtual environment
@@ -108,7 +108,7 @@ source venv/bin/activate       # On Windows: venv\Scripts\activate
 # 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. Make the helper script executable
+# 4. Make the helper script executable for Linux/Mac permissions (helpful, may not be required)
 chmod +x run.sh
 ```
 ---
