@@ -110,7 +110,7 @@ pip install -r requirements.txt
 
 # 4. Make the helper script executable
 chmod +x run.sh
-
+```
 ---
 
 ## 4. Usage
