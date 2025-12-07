@@ -43,7 +43,8 @@ The goal is to demonstrate **AI-native engineering** by orchestrating existing t
 python -m venv venv
 source venv/bin/activate       # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
-```bash
+```
+
 2. Run Tests
 I included a test suite to prove the logic handles the specific edge cases requested in the prompt.
 ```bash
