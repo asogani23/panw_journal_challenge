@@ -123,12 +123,4 @@ def show_summary(args) -> None:
     n = args.last
     to_show = entries[-n:]
 
-    print(f"Last {len(to_show)} entries from {storage_path}:")
-    for entry in to_show:
-        print("=" * 40)
-        print(f"#{entry.id} @ {entry.created_at}")
-        print(entry.text)
-        print("Tags:")
-        for k, v in entry.tags.items():
-            print(f"  - {k}: {v}")
-        # Scores printing coming in next commit for cleaner diff
+ 
