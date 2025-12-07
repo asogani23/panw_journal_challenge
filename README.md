@@ -28,17 +28,18 @@ The goal is to demonstrate **AI-native engineering** by orchestrating existing t
 
 ## 📂 Project Structure
 
-Key Modules
-src/analyzer.py: The core logic. Uses vaderSentiment for base scores, then adds an "energy index" (based on caps/punctuation) and an override layer for context (e.g., "crushing").
+**Key Modules**
 
-src/storage.py: Handles safe JSON I/O, timestamping (UTC ISO 8601), and data integrity.
+* **`src/analyzer.py`**: The core logic. Uses `vaderSentiment` for base scores, then adds an "energy index" (based on caps/punctuation) and an override layer for context (e.g., "crushing").
+* **`src/storage.py`**: Handles safe JSON I/O, timestamping (UTC ISO 8601), and data integrity.
+* **`src/cli.py`**: The interface. Handles arguments for `add` and `summary` commands.
 
-src/cli.py: The interface. Handles arguments for add and summary commands.
+---
 
-🚀 Setup and Usage
-1. Install Dependencies
-Bash
+## 🚀 Setup and Usage
 
+### 1. Install Dependencies
+```bash
 python -m venv venv
 source venv/bin/activate       # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
