@@ -44,4 +44,50 @@ class WellbeingAnalyzer:
         if score < 0.3: return "low"
         if score < 0.7: return "medium"
         return "high"
+    # ... inside WellbeingAnalyzer ...
+
+    @staticmethod
+    def _stress_level(mood: str, energy: str, text: str) -> str:
+        lowered = text.lower()
+        
+        # Keyword fail-safes
+        if any(w in lowered for w in ["overwhelmed", "stressed", "anxious", "panic", "burned out"]):
+            return "high"
+
+        # Derived context
+        if mood == "negative" and energy == "high":
+            return "high"
+        if mood == "negative" and energy == "low":
+            return "drained"
+        if mood == "positive" and energy == "high":
+            return "engaged"
+
+        return "moderate"
+    # ... inside WellbeingAnalyzer ...
+
+    @staticmethod
+    def _ambiguity_overrides(
+        text: str, mood: str, energy: str, stress: str, sentiment_scores: Dict[str, float]
+    ):
+        """
+        Refines tags based on specific idioms that VADER might misinterpret.
+        """
+        lowered = text.lower()
+
+        if "crushing" in lowered:
+            # Case A: Positive Achievement
+            if "crushing it" in lowered or "crushing at" in lowered:
+                mood = "positive"
+                stress = "engaged"
+                if energy == "low": energy = "medium"
+            
+            # Case B: Negative Pressure
+            elif "crushing me" in lowered or "crushing my" in lowered:
+                mood = "negative"
+                stress = "high"
+                # Manually correct VADER if it missed the negativity
+                if sentiment_scores["compound"] > -0.4:
+                    sentiment_scores["compound"] = -0.5
+
+        return mood, energy, stress
 
