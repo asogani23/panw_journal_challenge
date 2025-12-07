@@ -216,7 +216,7 @@ This section is explicit on purpose to follow the instructions about AI-native e
   - Speeding up small bits of boilerplate (argparse wiring, dataclass definitions, etc.).
   - Suggesting initial skeletons for functions or the CLI layout, which I then rewrote or refactored.
   - Refining some README phrasing when it made suggestions I liked.
-  The overall design (modules, data model, tagging logic, and tests) was decided and implemented by me.
+   - The overall design (modules, data model, tagging logic, and tests) was decided and implemented by me.
 
 - Local Python environment:
   - I installed and experimented with vaderSentiment.  
