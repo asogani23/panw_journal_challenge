@@ -28,19 +28,6 @@ The goal is to demonstrate **AI-native engineering** by orchestrating existing t
 
 ## 📂 Project Structure
 
-```text
-panw_journal_challenge/
-├── data/                      # Created automatically for journal_entries.json
-├── src/
-│   ├── __init__.py
-│   ├── analyzer.py            # WellbeingAnalyzer (VADER + Heuristics)
-│   ├── storage.py             # JSON-based persistence layer
-│   └── cli.py                 # CLI entry point (add + summary)
-├── tests/
-│   ├── __init__.py
-│   └── test_analyzer.py       # Unit tests for ambiguity and edge cases
-├── requirements.txt           # Dependencies (vaderSentiment, pytest)
-└── run.sh                     # Convenience wrapper
 Key Modules
 src/analyzer.py: The core logic. Uses vaderSentiment for base scores, then adds an "energy index" (based on caps/punctuation) and an override layer for context (e.g., "crushing").
 
