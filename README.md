@@ -52,7 +52,7 @@ The focus is **engineering integrity**. I optimized for:
   - Putting most of the complexity in the analyzer and storage modules, not the UI.  
   - Making the tool easy to script or extend later (e.g., more commands, different back-ends).
 
-- **AI usage (high level)**  
+- **AI usage (summary)**  
   I used **GitHub Copilot** as a coding assistant to speed up boilerplate and explore options, but:
   - I wrote and organized the final modules myself.  
   - I added unit tests and manual CLI runs to verify behavior on edge cases.  
