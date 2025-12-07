@@ -54,18 +54,20 @@ Verifies: "Crushing it" (Positive) vs "Crushing me" (Negative), empty inputs, an
 3. Use the CLI
 Add an Entry:
 
-Bash
+```bash
 
 # Using the helper script
 ./run.sh add "I am absolutely CRUSHING IT at work today! 🔥"
 
 # Or directly via Python
 python -m src.cli add "The workload is crushing me and I'm so stressed out..."
+```
 View Summary:
 
-Bash
+```bash
 
 ./run.sh summary --last 3
+```
 Sample Output:
 
 Plaintext
