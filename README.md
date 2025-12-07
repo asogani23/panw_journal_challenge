@@ -50,7 +50,7 @@ I included a test suite to prove the logic handles the specific edge cases reque
 ```bash
 pytest
 Verifies: "Crushing it" (Positive) vs "Crushing me" (Negative), empty inputs, and explicit stress words.
-
+```
 3. Use the CLI
 Add an Entry:
 
