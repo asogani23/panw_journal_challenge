@@ -21,6 +21,27 @@ def build_parser() -> argparse.ArgumentParser:
         type=str,
         help="Optional path to JSON storage (default: data/journal_entries.json).",
     )
+    # ... inside build_parser ...
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    add_parser = subparsers.add_parser("add", help="Add a new journal entry.")
+    add_parser.add_argument(
+        "text",
+        type=str,
+        help="Journal text (wrap in quotes).",
+    )
+
+    summary_parser = subparsers.add_parser(
+        "summary", help="Show a summary of recent entries."
+    )
+    summary_parser.add_argument(
+        "--last",
+        type=int,
+        default=3,
+        help="Number of entries to show (default: 3).",
+    )
+
+    return parser
     
     return parser
 
