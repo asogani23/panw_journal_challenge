@@ -242,15 +242,15 @@ This section is explicit on purpose to follow the instructions about AI-native e
    - Adjusted mood thresholds for VADER’s compound to reduce borderline mislabels.  
    - Tuned energy bucketing so casual messages do not show as “high energy,” but intense ALL-CAPS / punctuation does.
 
-### 6.3 Responsibility
+### 6.3 Ownership
 
-Even though I used ChatGPT to speed up boilerplate and iterate on ideas, I:
+Even though I used GitHub Copilot as a helper, I:
 
 - Reviewed and edited every line of code.  
-- Designed and tuned the heuristics and override rules.  
-- Wrote and ran tests to make sure the behavior matched the challenge spec.
+- Designed and refined the heuristics and override rules.  
+- Wrote and ran the tests that gate the analyzer’s behavior.
 
-I take responsibility for the final implementation and any remaining edge cases.
+I treat all bugs, edge cases, and security concerns in this repository as **my responsibility**, not the model’s.
 
 ---
 
