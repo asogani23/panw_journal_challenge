@@ -159,7 +159,7 @@ This shows that the tool is not just doing a naive keyword search for "crushing"
 
 ## 6. Methodology & AI Usage
 
-This section is explicit on purpose to follow the PANW instructions about AI-native engineering.
+This section is explicit on purpose to follow the instructions about AI-native engineering.
 
 ### 6.1 Tools Used
 
