@@ -1,4 +1,4 @@
-# panw_journal_challenge - AI-Powered Journaling CLI
+# AI-Powered Journaling CLI
 
 This repository contains my solution for the Palo Alto Networks Intern Engineer Case Study.
 
