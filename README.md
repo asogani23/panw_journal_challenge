@@ -28,19 +28,6 @@ The goal is to demonstrate **AI-native engineering**:
 
 ## 2. Project Structure
 
-panw_journal_challenge/
-├── data/                      # Created automatically for journal_entries.json
-├── src/
-│   ├── __init__.py
-│   ├── analyzer.py            # WellbeingAnalyzer (sentiment + heuristics)
-│   ├── storage.py             # JSON-based persistence layer
-│   └── cli.py                 # CLI entry point (add + summary)
-├── tests/
-│   ├── __init__.py
-│   └── test_analyzer.py       # Unit tests for ambiguity + edge cases
-├── requirements.txt
-└── run.sh                     # Convenience wrapper for python -m src.cli
-
 Key modules:
 
 - src/analyzer.py  
