@@ -49,8 +49,9 @@ pip install -r requirements.txt
 I included a test suite to prove the logic handles the specific edge cases requested in the prompt.
 ```bash
 pytest
-Verifies: "Crushing it" (Positive) vs "Crushing me" (Negative), empty inputs, and explicit stress words.
 ```
+Verifies: "Crushing it" (Positive) vs "Crushing me" (Negative), empty inputs, and explicit stress words.
+
 3. Use the CLI
 Add an Entry:
 
