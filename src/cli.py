@@ -64,6 +64,30 @@ def build_parser() -> argparse.ArgumentParser:
     
     return parser
 
+
+# ... inside show_summary(args) ...
+def show_summary(args) -> None:
+    storage_path = Path(args.file) if args.file else DEFAULT_DATA_PATH
+    storage = JournalStorage(storage_path)
+    entries = storage.load_entries()
+
+    if not entries:
+        print(f"No entries found in {storage_path}. Try adding one with 'add'.")
+        return
+
+    n = args.last
+    to_show = entries[-n:]
+
+    print(f"Last {len(to_show)} entries from {storage_path}:")
+    for entry in to_show:
+        print("=" * 40)
+        print(f"#{entry.id} @ {entry.created_at}")
+        print(entry.text)
+        print("Tags:")
+        for k, v in entry.tags.items():
+            print(f"  - {k}: {v}")
+        # Scores printing coming in next commit for cleaner diff
+
 def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
