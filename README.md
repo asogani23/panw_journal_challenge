@@ -30,22 +30,22 @@ The goal is to demonstrate **AI-native engineering**:
 
 Key modules:
 
-- src/analyzer.py  
+- ## src/analyzer.py  
   - WellbeingAnalyzer:
     - Uses vaderSentiment for base sentiment.  
     - Adds an “energy index” based on exclamation marks and ALL-CAPS words.  
     - Infers stress from mood + energy + explicit stress words.  
     - Adds override rules for phrases involving "crushing".
 
-- src/storage.py  
+- ## src/storage.py  
   - JournalStorage handles JSON file I/O (data/journal_entries.json).  
   - Entry dataclass is the on-disk representation: id, created_at, text, tags, scores.
 
-- src/cli.py  
+- ## src/cli.py  
   - add subcommand: analyze a new entry, persist it, print tags + scores.  
   - summary subcommand: print a formatted summary of the last N entries.
 
-- tests/test_analyzer.py  
+- ## tests/test_analyzer.py  
   - Unit tests for:
     - "crushing it" vs "crushing me".  
     - Empty input.  
@@ -235,5 +235,4 @@ For this challenge, I focused on keeping the tool simple, robust, and easy to re
 
 
 
- ## 6. Methodology & AI 
- Usage This section follows the PANW guidelines on AI-native engineering, transparency, and verification. ### 6.1 Tools used - **ChatGPT** I used ChatGPT as a coding assistant to: - Brainstorm the module layout (`analyzer`, `storage`, `cli`, `tests`). - Iterate on the energy and stress heuristics. - Draft initial versions of the CLI and unit tests. - **Local Python environment** I: - Installed and experimented with `vaderSentiment`. - Ran the CLI with different sample entries. - Tuned thresholds and overrides based on the actual outputs. ### 6.2 How I verified the system 1. **Unit tests (`tests/test_analyzer.py`)** I added tests to confirm that: - `"I am absolutely CRUSHING IT at work today! 🔥"` → `mood = positive`, `stress = engaged`, `energy` is medium or high. - `"The workload is crushing me and I am so stressed out..."` → `mood = negative`, `stress = high`. - Empty or whitespace-only text → `mood = neutral`, `energy = low`, `stress = unknown`. - Sentences containing `"overwhelmed"` → `stress = high`. - ALL-CAPS text plus `!!!` shifts `energy` toward medium/high. 2. **Manual CLI runs** Using `./run.sh add ...` and `./run.sh summary --last N`, I checked that: - The CLI does not crash on messy input (slang, emojis, empty strings). - `data/journal_entries.json` stays well-formed and easy to read. - Tags behave as expected for ambiguous phrases like `"crushing it"` / `"crushing me"`. 3. **Threshold tuning** - Adjusted mood thresholds for VADER’s `compound` to reduce borderline mislabels. - Tuned energy bucketing so casual messages do not show as “high energy,” but intense ALL-CAPS / punctuation does. ### 6.3 Responsibility Even though I used ChatGPT to speed up some boilerplate and explore ideas, I: - Reviewed and edited every line of code. - Designed and refined the heuristics and override rules. - Wrote and ran tests to make sure the behavior matched the challenge spec. I take responsibility for the final implementation and any remaining edge cases or bugs. 
+ 
