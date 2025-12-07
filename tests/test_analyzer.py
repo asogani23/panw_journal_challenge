@@ -33,3 +33,8 @@ def test_explicit_stress_word_overrides_to_high_stress(analyzer):
     text = "I feel overwhelmed lately but I am trying to stay calm."
     result = analyzer.analyze(text)
     assert result.tags["stress"] == "high"
+    
+def test_high_caps_and_exclamations_raise_energy(analyzer):
+    text = "I AM SO TIRED!!!"
+    result = analyzer.analyze(text)
+    assert result.tags["energy"] in ("medium", "high")
