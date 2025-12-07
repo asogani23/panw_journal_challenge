@@ -211,11 +211,12 @@ This section is explicit on purpose to follow the instructions about AI-native e
 
 ### 6.1 Tools Used
 
-- GitHub Copilot -
-  I used Copilot as a coding assistant to:
-  - Brainstorm the overall structure (splitting analyzer, storage, and cli).  
-  - Draft the initial CLI.
-  - Refine the phrasing in the README
+- GitHub Copilot  
+  I used Copilot as an autocomplete-style assistant inside my editor. Typical usage:
+  - Speeding up small bits of boilerplate (argparse wiring, dataclass definitions, etc.).
+  - Suggesting initial skeletons for functions or the CLI layout, which I then rewrote or refactored.
+  - Refine the README phrasing
+  The overall design (modules, data model, tagging logic, and tests) was decided and implemented by me.
 
 - Local Python environment:
   - I installed and experimented with vaderSentiment.  
