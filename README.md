@@ -153,7 +153,7 @@ You can also point the CLI at a custom storage file:
 
     ./run.sh --file data/alt_journal.json add "Separate test journal file."
     ./run.sh --file data/alt_journal.json summary --last 2
-### 4.5 Running Tests
+### 4.4 Running Tests
 
 From the project root (after installing dependencies):
 
@@ -215,7 +215,7 @@ This section is explicit on purpose to follow the instructions about AI-native e
   I used Copilot as an autocomplete-style assistant inside my editor. Typical usage:
   - Speeding up small bits of boilerplate (argparse wiring, dataclass definitions, etc.).
   - Suggesting initial skeletons for functions or the CLI layout, which I then rewrote or refactored.
-  - Refine the README phrasing
+  - Refining some README phrasing when it made suggestions I liked.
   The overall design (modules, data model, tagging logic, and tests) was decided and implemented by me.
 
 - Local Python environment:
